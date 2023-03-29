@@ -24,6 +24,8 @@ Telegram bot should have the following capabilities:
 -------------------------------------------------
 
 Team Lead - Жадько Назар;
+
 Telegram Bot Developer - Поляков Валентин;
+
 Neural Network Developers: Чигринець Євгеній, Григор'єв Костянтин.
 
