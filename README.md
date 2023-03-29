@@ -3,6 +3,7 @@
 Telegram bot, based on aiogram lib, that analyze an image, get a text from it and than send a text to user. 
 The analysis and getting text is performed using a neural network.
 
+-------------------------------------------------
 
 Telegram bot should have the following capabilities:
 
@@ -20,6 +21,7 @@ Telegram bot should have the following capabilities:
 
 • The user must be able to switch between menus using the appropriate buttons.
 
+-------------------------------------------------
 
 Team Lead - Жадько Назар;
 Telegram Bot Developer - Поляков Валентин;
