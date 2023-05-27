@@ -4,8 +4,9 @@ import time
 import dialogue
 import easyocr
 import os
+from threading import Thread
 
-from create_bot import bot, dp
+from create_bot import bot, dp, openai
 from keyboards import client_kb
 
 
@@ -39,7 +40,7 @@ async def team(message : types.Message):
     )
 
 
-async def govnoy_vonyaet(message : types.Message):
+async def image_handler(message : types.Message):
     
     from random import choices
     from string import ascii_letters
@@ -91,8 +92,30 @@ async def none_reply(message: types.Message):
         dialogue.error,
     )
 
+
+async def text_gpt_handler(message: types.Message):
+    messages = [
+            {"role": "system", "content": 'You are a chat assistant.'},
+            {"role": "user", "content": message.text},
+            ]
+
+    try:
+        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
+                                                messages=messages)
+    except Exception as e:
+        print(f"OpenAI API returned an Error: {e}")
+        await bot.send_message(message.from_user.id, dialogue.server_error)
+    
+    full_response = response['choices'][0]['message']['content']
+    full_response = full_response.split('\n\n', 1)
+
+    for line in full_response:
+        await bot.send_message(message.from_user.id, line)
+
+
     
 
 def register_handlers_client(dp: Dispatcher):
-    dp.register_message_handler(govnoy_vonyaet, content_types='photo')
-    dp.register_message_handler(none_reply, content_types=['text', 'audio', 'document', 'video', 'video_note', 'voice', 'sticker'])
+    dp.register_message_handler(image_handler, content_types='photo')
+    dp.register_message_handler(text_gpt_handler, content_types='text')
+    dp.register_message_handler(none_reply, content_types=['audio', 'document', 'video', 'video_note', 'voice', 'sticker'])
