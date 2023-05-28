@@ -9,11 +9,25 @@ from create_bot import bot, dp, openai
 from keyboards import client_kb
 
 
-@dp.message_handler(commands=['start', 'help'])
-@dp.message_handler(lambda message: message.text == 'Довідка 🌚')
+@dp.message_handler(commands=['start'])
 async def command_start(message : types.Message):
 
-    await message.answer(dialogue.hello_message, reply_markup=client_kb.greet_kb, parse_mode='HTML')
+    await message.answer(
+        dialogue.hello_message.format(name=message.from_user.first_name),
+        reply_markup=client_kb.greet_kb,
+        parse_mode='HTML'
+    )
+
+
+@dp.message_handler(commands=['help'])
+@dp.message_handler(lambda message: message.text == 'Довідка 🌚')
+async def command_help(message : types.Message):
+
+    await message.answer(
+        dialogue.help_message,
+        reply_markup=client_kb.greet_kb,
+        parse_mode='HTML'
+    )
 
 
 @dp.message_handler(commands=['team'])
@@ -101,7 +115,7 @@ async def test_image_handler(message : types.Message):
     from random import choices
     from string import ascii_letters
 
-    text = '\n'.join(await pic_to_text('test_picture2.png'))
+    text = '\n'.join(await pic_to_text('tests/test_picture2.png'))
     
     await message.answer(text)
     

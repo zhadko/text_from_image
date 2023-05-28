@@ -9,7 +9,7 @@ Telegram bot should have the following capabilities:
 
 • Display greetings at the beginning of communication (/start);
 
-• Display information about project developers (/info);
+• Display information about project developers (/team);
 
 • Display the help text for using the bot (/help);
 
@@ -17,9 +17,9 @@ Telegram bot should have the following capabilities:
 
 • Sending the result of text extraction to the user;
 
-• Processing of all messages that are not related to the functionality of the bot;
+• Processing of all content types that are not image with error message;
 
-• The user must be able to switch between menus using the appropriate buttons.
+• Processing of all text messages with openai API (ChatGPT) and send the GPT generated answer.
 
 -------------------------------------------------
 
