@@ -35,7 +35,7 @@ class TestBot(unittest.IsolatedAsyncioTestCase):
         calls = await requester.query(message)
 
         answer_message = calls.send_message.fetchone().text
-        self.assertEqual(answer_message, dialogue.hello_message)
+        self.assertEqual(answer_message, dialogue.hello_message.format(name=message.from_user.first_name))
 
     async def test_command_help_handler(self):
         requester = Requester(request_handler=MessageHandler(command_help, commands=["help"]))
