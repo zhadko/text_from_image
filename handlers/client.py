@@ -7,6 +7,7 @@ import os
 
 from create_bot import bot, dp, openai
 from keyboards import client_kb
+from neural.neural_funcs import pic_to_text
 
 
 @dp.message_handler(commands=['start'])
@@ -75,15 +76,6 @@ async def image_handler(message : types.Message):
     
     for f in os.listdir('temp'):
         os.remove(os.path.join('temp', f))
-        
-        
-async def pic_to_text(file_path):
-    try:
-        reader = easyocr.Reader(['uk', 'en'])
-        result = reader.readtext(file_path, detail=0, paragraph=True)
-    except Exception as e:
-        raise Exception(f"Text recognition failed: {e}")
-    return result
 
 
 async def none_reply(message: types.Message):
@@ -111,9 +103,6 @@ async def text_gpt_handler(message: types.Message):
 
 
 async def test_image_handler(message : types.Message):
-    
-    from random import choices
-    from string import ascii_letters
 
     text = '\n'.join(await pic_to_text('tests/test_picture2.png'))
     
