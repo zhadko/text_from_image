@@ -8,7 +8,7 @@ import openai
 
 TOKEN = 'BOT_TOKEN'
 
-openai.api_key = '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'
+openai.api_key = 'OPENAI_API_KEY'
 
 logging.basicConfig(level=logging.INFO)
 

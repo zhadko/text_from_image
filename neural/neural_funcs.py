@@ -3,12 +3,12 @@ import os
 import cv2
 
 
-async def is_valid_file_path(file_path):
+def is_valid_file_path(file_path):
     if not os.path.isfile(file_path):
         raise ValueError(f"Invalid file path: {file_path}")
 
 
-async def is_supported_file_format(file_path):
+def is_supported_file_format(file_path):
     if not (file_path.endswith('.jpg') or file_path.endswith('.png')):
         raise ValueError(f"Unsupported file format: {file_path}")
 
